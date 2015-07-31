@@ -52,8 +52,14 @@ case(estado_actual)
 						end
 				end
 			START:
-				begin					
-					if(rx_dato_out == "a")
+				begin
+					if(rx_done == 0)	//¿PORQUE SI SE SACA ESTE IF TIRA CUALQUIER COSA?
+						begin
+							tx_dato_in = rx_dato_out;
+							tx_start = 1;
+							estado_actual = DATA;
+						end
+					/*if(rx_dato_out == "a")
 						begin
 							tx_dato_in = "p";
 							tx_start = 1;
@@ -64,10 +70,10 @@ case(estado_actual)
 							tx_dato_in = "0";
 							tx_start = 1;
 							estado_actual = DATA;
-						end
+						end*/
 					else 
 						begin
-							estado_actual = IDLE;
+							estado_actual = estado_actual;
 						end
 				end
 			DATA:
